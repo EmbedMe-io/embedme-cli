@@ -5,16 +5,16 @@ import re
 import subprocess
 import sys
 import venv
-from .const import DEFAULT_EMBEDME_PATH, get_embedme_package
+from .const import DEFAULT_EMBEDME_PATH, get_eiombedme_package
 
 logging.basicConfig(level=logging.INFO)
 
-_LOGGER = logging.getLogger("embedme")
+_LOGGER = logging.getLogger("embedmeio")
 
 
 def check_venv():
-    # First check for the presence of embedme
-    if importlib.util.find_spec("esphome") and importlib.util.find_spec("esphome.embedme"):
+    # First check for the presence of embedmeio
+    if importlib.util.find_spec("esphome") and importlib.util.find_spec("embedmeio"):
         return True
 
     # Are we running in a venv?
@@ -51,12 +51,12 @@ def activate_venv():
     py_executable = DEFAULT_EMBEDME_PATH / "bin" / "python"
     if not py_executable.exists(follow_symlinks=True) or not os.access(py_executable, os.X_OK):
         return False
-    embedme_main = DEFAULT_EMBEDME_PATH / "bin" / "embedme"
+    embedme_main = DEFAULT_EMBEDME_PATH / "bin" / "embedmeio"
     if not embedme_main.exists(follow_symlinks=True):
         return False
 
     _LOGGER.info("Activating EmbedMe venv in %s", DEFAULT_EMBEDME_PATH)
-    os.execv(py_executable, ["embedme", "-m", "embedme", *sys.argv[1:]])
+    os.execv(py_executable, ["embedmeio", "-m", "embedmeio", *sys.argv[1:]])
 
 
 def create_venv():

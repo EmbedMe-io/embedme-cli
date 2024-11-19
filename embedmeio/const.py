@@ -4,7 +4,7 @@ __version__ = "2024.12.0-dev"
 
 from pathlib import Path
 
-DEFAULT_EMBEDME_PATH = Path.home() / ".embedme" / __version__
+DEFAULT_EMBEDME_PATH = Path.home() / ".embedmeio" / __version__
 
 def get_embedme_package():
     if "dev" in __version__:

@@ -3,7 +3,7 @@ requires = ["setuptools==69.2.0", "wheel~=0.43.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name        = "embedme"
+name        = "embedmeio"
 license     = {text = "MIT"}
 description = "Low-code embedded systems build tool"
 readme      = "README.md"
@@ -31,18 +31,18 @@ dynamic = ["dependencies", "optional-dependencies", "version"]
 "Discord"                 = "https://discord.gg/egJ3ekJu"
 
 [project.scripts]
-embedme = "embedme.__main__:main"
+embedmeio = "embedmeio.__main__:main"
 
 [tool.setuptools]
 platforms            = ["any"]
 zip-safe             = false
 include-package-data = true
-packages = ["embedme"]
+packages = ["embedmeio"]
 
 
 [tool.setuptools.dynamic]
 dependencies = {file = ["requirements.txt"]}
-version = {attr = "embedme.const.__version__"}
+version = {attr = "embedmeio.const.__version__"}
 
 
 [tool.black]
@@ -125,7 +125,7 @@ ignore = [
 [tool.ruff.lint.isort]
 force-sort-within-sections = true
 known-first-party = [
-  "embedme",
+  "embedmeio",
 ]
 combine-as-imports = true
 split-on-trailing-comma = false
