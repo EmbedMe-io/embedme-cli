@@ -5,7 +5,7 @@ import re
 import subprocess
 import sys
 import venv
-from .const import DEFAULT_EMBEDME_PATH, get_eiombedme_package
+from .const import DEFAULT_EMBEDME_PATH, get_embedme_package
 
 logging.basicConfig(level=logging.INFO)
 
@@ -14,11 +14,10 @@ _LOGGER = logging.getLogger("embedmeio")
 
 def check_venv():
     # First check for the presence of embedmeio
-    if importlib.util.find_spec("esphome") and importlib.util.find_spec("embedmeio"):
+    if importlib.util.find_spec("esphome") and importlib.util.find_spec("esphome.embedmeio"):
         return True
 
     # Are we running in a venv?
-    _LOGGER.info("Running in %s", sys.prefix)
     if sys.prefix != sys.base_prefix:
         # if esphome is installed, it's not the right one
         if importlib.util.find_spec("esphome"):
@@ -46,13 +45,13 @@ def ask(prompt):
 def activate_venv():
     import os
 
-    if not DEFAULT_EMBEDME_PATH.exists(follow_symlinks=True) or not DEFAULT_EMBEDME_PATH.is_dir():
+    if not DEFAULT_EMBEDME_PATH.exists() or not DEFAULT_EMBEDME_PATH.is_dir():
         return False
     py_executable = DEFAULT_EMBEDME_PATH / "bin" / "python"
-    if not py_executable.exists(follow_symlinks=True) or not os.access(py_executable, os.X_OK):
+    if not py_executable.exists() or not os.access(py_executable, os.X_OK):
         return False
     embedme_main = DEFAULT_EMBEDME_PATH / "bin" / "embedmeio"
-    if not embedme_main.exists(follow_symlinks=True):
+    if not embedme_main.exists():
         return False
 
     _LOGGER.info("Activating EmbedMe venv in %s", DEFAULT_EMBEDME_PATH)
